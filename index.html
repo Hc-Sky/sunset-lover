@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset Lover - Spots & Routes Panoramiques</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-sun"></i> Sunset Lover</h1>
+            <p>Découvrez les plus beaux spots de lever/coucher de soleil et routes panoramiques</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-tabs">
+                <li><a href="#spots" class="tab-link active" data-tab="spots">
+                    <i class="fas fa-map-marker-alt"></i> Spots Soleil
+                </a></li>
+                <li><a href="#routes" class="tab-link" data-tab="routes">
+                    <i class="fas fa-route"></i> Routes Panoramiques
+                </a></li>
+                <li><a href="#map" class="tab-link" data-tab="map">
+                    <i class="fas fa-map"></i> Carte
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Spots Section -->
+        <section id="spots" class="tab-content active">
+            <div class="section-header">
+                <h2><i class="fas fa-sunrise"></i> Spots Lever/Coucher de Soleil</h2>
+                <button id="add-spot-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Ajouter un Spot
+                </button>
+            </div>
+
+            <div id="spot-form" class="form-container hidden">
+                <h3>Nouveau Spot</h3>
+                <form id="spot-form-element">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="spot-name">Nom du Spot:</label>
+                            <input type="text" id="spot-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="spot-type">Type:</label>
+                            <select id="spot-type" required>
+                                <option value="">Sélectionner...</option>
+                                <option value="sunrise">Lever de soleil</option>
+                                <option value="sunset">Coucher de soleil</option>
+                                <option value="both">Les deux</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="spot-latitude">Latitude:</label>
+                            <input type="number" id="spot-latitude" step="0.000001" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="spot-longitude">Longitude:</label>
+                            <input type="number" id="spot-longitude" step="0.000001" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="spot-description">Description:</label>
+                        <textarea id="spot-description" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                        <button type="button" id="cancel-spot-btn" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="spots-list" class="items-grid">
+                <!-- Spots will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Routes Section -->
+        <section id="routes" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-mountain"></i> Routes Panoramiques</h2>
+                <button id="add-route-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Ajouter une Route
+                </button>
+            </div>
+
+            <div id="route-form" class="form-container hidden">
+                <h3>Nouvelle Route</h3>
+                <form id="route-form-element">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="route-name">Nom de la Route:</label>
+                            <input type="text" id="route-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="route-type">Type:</label>
+                            <select id="route-type" required>
+                                <option value="">Sélectionner...</option>
+                                <option value="col">Col de montagne</option>
+                                <option value="serpentin">Route serpentine</option>
+                                <option value="scenic">Route panoramique</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="route-start-lat">Latitude Départ:</label>
+                            <input type="number" id="route-start-lat" step="0.000001" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="route-start-lng">Longitude Départ:</label>
+                            <input type="number" id="route-start-lng" step="0.000001" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="route-end-lat">Latitude Arrivée:</label>
+                            <input type="number" id="route-end-lat" step="0.000001" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="route-end-lng">Longitude Arrivée:</label>
+                            <input type="number" id="route-end-lng" step="0.000001" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="route-difficulty">Difficulté:</label>
+                            <select id="route-difficulty">
+                                <option value="easy">Facile</option>
+                                <option value="medium">Modérée</option>
+                                <option value="hard">Difficile</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="route-length">Distance (km):</label>
+                            <input type="number" id="route-length" step="0.1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="route-description">Description:</label>
+                        <textarea id="route-description" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                        <button type="button" id="cancel-route-btn" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="routes-list" class="items-grid">
+                <!-- Routes will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section id="map" class="tab-content">
+            <div class="section-header">
+                <h2><i class="fas fa-map"></i> Carte Interactive</h2>
+            </div>
+            <div id="map-container">
+                <div id="interactive-map">
+                    <p class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i><br>
+                        Carte interactive à venir<br>
+                        <small>Les spots et routes ajoutés apparaîtront ici</small>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Sunset Lover - Explorez les plus beaux paysages</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
